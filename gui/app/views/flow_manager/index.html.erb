@@ -1,9 +1,23 @@
-<h1>Hello world</h1>
+<h1>Adhearsion Visual Dialplan Creator</h1>
 
-<p>New context: <%= text_field "foobar", "foobar" %> <%%></p>
+<!--
+<p>New context: <%= text_field "foobar", "foobar" %> <%= submit_tag "Add" %></p>
+-->
+
+<% if @contexts.empty? %>
+  <strong>There are no contexts in the system! Maybe you should create some!</strong>
+<% else %>
+
+<h2>Reorder the following contexts to change how calls are processed.</h2>
 
 <ul id="call-flow">
-<% for context in @contexts %>
-  <li><%=h context.name %></li>
-<% end %>
+  <% for context in @contexts %>
+    <li id="<%=context_drag_id context %>"><%=h context.context_name %></li><%= draggable_context context %>
+  <% end %>
 </ul>
+<%= sortable_element 'call-flow',
+      :complete => visual_effect(:highlight, 'list'), 
+      :url => { :action => "order" } %>
+<% end %>
+
+<p>Note: changes are saved automatically.</p>
