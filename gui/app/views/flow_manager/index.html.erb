@@ -1,0 +1,9 @@
+<h1>Hello world</h1>
+
+<p>New context: <%= text_field "foobar", "foobar" %> <%%></p>
+
+<ul id="call-flow">
+<% for context in @contexts %>
+  <li><%=h context.name %></li>
+<% end %>
+</ul>

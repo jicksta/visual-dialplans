@@ -1,4 +1,5 @@
 adhearsion {
-  simon = new_simon_game
-  simon.start
+  ExecutableContext.each do |context|
+    instance_eval eval(context.name)
+  end
 }
